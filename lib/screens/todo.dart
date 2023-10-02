@@ -8,12 +8,14 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
+  // Initialize a list of TaskItem objects
   List<TaskItem> taskList = [
     TaskItem(title: 'Eat', isCompleted: false),
     TaskItem(title: 'Sleep', isCompleted: false),
     TaskItem(title: 'Repeat', isCompleted: false),
   ];
 
+  //Declarations
   TextEditingController taskController = TextEditingController();
   int editIndex = -1;
 
@@ -36,14 +38,15 @@ class _TodoListState extends State<TodoList> {
                 suffixIcon: IconButton(
                   icon: Icon(editIndex == -1 ? Icons.add : Icons.check),
                   onPressed: () {
-                    // Add the task to the taskList
                     setState(() {
                       if(taskController.text.isNotEmpty)
                       {
                         if (editIndex == -1) {
+                          // Add a new task to the taskList
                           taskList.add(TaskItem(title: taskController.text, isCompleted: false));
                         } 
                         else {
+                          // Edit the existing task from taskList
                           taskList[editIndex].title = taskController.text;
                           editIndex = -1;
                         }
@@ -95,6 +98,7 @@ class _TodoListState extends State<TodoList> {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        // Mark as done
                         Checkbox(
                           value: task.isCompleted,
                           activeColor: Colors.purple,
@@ -104,6 +108,7 @@ class _TodoListState extends State<TodoList> {
                             });
                           },
                         ),
+                        // Edit task
                         IconButton(
                           icon: Icon(Icons.edit), color: Colors.purple,
                           onPressed: () {
@@ -113,6 +118,7 @@ class _TodoListState extends State<TodoList> {
                             });
                           },
                         ),
+                        // Delete task
                         IconButton(
                           icon: Icon(Icons.delete), color: Colors.purple,
                           onPressed: () {
@@ -156,6 +162,7 @@ class _TodoListState extends State<TodoList> {
   }
 }
 
+// TaskItem class to initialize and hold attributes of a task
 class TaskItem {
   String title;
   bool isCompleted;
